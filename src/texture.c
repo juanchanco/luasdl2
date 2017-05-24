@@ -94,10 +94,13 @@ static int
 l_texture_lock(lua_State *L)
 {
 	/* XXX */
+	void *pixels;
+	int pitch;
+	SDL_Texture *tex = commonGetAs(L, 1, TextureName, SDL_Texture *);
+	SDL_LockTexture(tex, NULL, &pixels, &pitch);
 
-	(void)L;
-
-	return 0;
+	return commonPush(L, "pi", "pixels", pixels, pitch);
+	/*return 2;*/
 }
 
 /*
